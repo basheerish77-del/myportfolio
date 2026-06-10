@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BİŞİŞ | NEURA Coffee Lab - Prospectus (AR/EN)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0A0A0A;
+            font-family: 'Inter', 'Cairo', system-ui, sans-serif;
+            color: #E5E5E5;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+        h1, h2, h3, .badge, .stat-number {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .prospectus-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0F0F0F;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #D4AF37;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-top: 0.75rem;
+        }
+        .lang-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            background: #1E1E1E;
+            border-bottom: 1px solid #2A2A2A;
+        }
+        .lang-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background: #141414;
+            border: none;
+            color: #999;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: #0A0A0A;
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .content-pane {
+            display: none;
+            padding: 2rem 2.5rem;
+            animation: fade 0.25s ease;
+        }
+        .content-pane.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .section {
+            background: #121212;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #262626;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #D4AF37;
+            border-right: 4px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #D4AF37;
+            line-height: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0D0D0D;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #262626;
+            vertical-align: middle;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            text-align: center;
+        }
+        th:first-child, td:first-child {
+            text-align: right;
+        }
+        th {
+            background: #1A1A1A;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        td {
+            color: #E5E5E5;
+        }
+        .gold {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        button.clipboard {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+        button.clipboard:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #262626;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #888;
+        }
+        .verification-small {
+            font-size: 0.65rem;
+            text-align: center;
+            color: #AAA;
+            margin-top: 1rem;
+            border-top: 1px solid #2A2A2A;
+            padding-top: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="prospectus-container">
+    <div class="header">
+        <h1>⚡ BİŞİŞ PROSPECTUS</h1>
+        <div class="badge">NEURA COFFEE LAB – BOMONTI, ISTANBUL | PRE‑SEED | VISIONARY CAPITAL</div>
+    </div>
+    <div class="lang-panel">
+        <button class="lang-btn active" data-lang="ar">العربية (AR)</button>
+        <button class="lang-btn" data-lang="en">ENGLISH (EN)</button>
+    </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="content-ar" class="content-pane active" dir="rtl" aria-hidden="false">
+        <div class="section">
+            <h2>🔮 ملخص تنفيذي – ثورة الإنتاجية في بومونتي</h2>
+            <p><strong>NEURA Coffee Lab</strong> هو تصور لأول “مختبر إنتاجية” في إسطنبول يجمع بين قهوة الاختصاص (SCA 85+) والبنية التحتية الذكية للمحترفين عن بُعد. الموقع المستهدف هو منطقة بومونتي – “بروكلين إسطنبول” – حيث يعاني رواد الأعمال والطلاب والمستقلون من نقص حاد في مساحات العمل الهادئة والمجهزة تقنياً.</p>
+            <div class="grid-2" style="margin-top: 1rem;">
+                <div><span class="stat-number">$55k</span><br>رأس المال المطلوب (تقديري)</div>
+                <div><span class="stat-number">33%</span><br>هامش الربح الصافي المستهدف</div>
+                <div><span class="stat-number">7-9</span><br>شهور استرداد مستهدفة</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 الميزة التنافسية المقترحة</h2>
+            <ul>
+                <li>⚡ <strong>بنية تحتية للإنتاجية:</strong> طاولات مدمجة بشواحن Type-C ولا سلكية، إنترنت فائق السرعة (ألياف + احتياطي 5G)، مقاعد مصممة هندسياً للعمل الفردي.</li>
+                <li>🤖 <strong>منظومة تقنية ذكية:</strong> إدارة المخزون بالغرام (مخطط لها)، نظام اشتراكات رقمية للشركات، دفع بالعملات المستقرة للتحوط من تقلبات الليرة.</li>
+                <li>🎨 <strong>تصميم مستقبلي (Cyber-Minimalist):</strong> جمالية معملية قابلة للتصوير لا تستطيع سلاسل المقاهي التقليدية تقليدها.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>💰 هيكل رأس المال – Pre-Seed (مرحلة الفكرة)</h2>
+            <table id="funding-ar">
+                <thead><tr><th>المصدر</th><th>المبلغ (دولار)</th><th>الشروط</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Equity (مستثمر رؤيوي)</th><td>$40,000 – $55,000</th><td>مقابل 30%-40% أسهم (قابل للتفاوض)</th></tr>
+                    <tr><td class="gold">تمويل صغير / دين</th><td>$10,000 – $15,000</th><td>بنوك محلية (إذا لزم الأمر)</th></tr>
+                    <tr><td class="gold">منح حكومية (KOSGEB)</th><td>$0 – $5,000</th><td>برنامج KOSGEB للشركات التقنية الصغيرة (قيد الاستكشاف)</th></td>
+                    <tr><td class="gold"><strong>الإجمالي المستهدف</strong></th><td class="gold"><strong>$55,000 – $65,000</strong></th><td>لتغطية التجهيز والتراخيص ورأس المال العامل</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="funding-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>📊 التوقعات المالية (أول 12 شهراً) – تقديرية</h2>
+            <table id="projections-ar">
+                <thead>
+                    <tr><th>المؤشر</th><th>الشهر 1-3</th><th>الشهر 4-6</th><th>الشهر 7-12</th><th>المعدل السنوي</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="gold">الإيرادات الشهرية</th><td>$6,000</th><td>$12,000</th><td>$18,000</th><td>$14,400</th></tr>
+                    <tr><td class="gold">المصاريف التشغيلية</th><td>$9,000</th><td>$11,000</th><td>$12,000</th><td>$11,000</th></tr>
+                    <tr><td class="gold">صافي الربح الشهري</th><td>($3,000)</th><td>$1,000</th><td>$6,000</th><td>$3,400</th></tr>
+                    <tr><td class="gold">نقطة التعادل</th><td colspan="4">الشهر السابع – التدفق النقدي التراكمي يصبح موجباً (تقديري)</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="projections-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>🌱 الاستدامة والحوكمة (ESG)</h2>
+            <ul>
+                <li>♻️ <strong>بيئي:</strong> أكواب قابلة للتحلل، صفر نفايات بلاستيكية، معدات موفرة للطاقة (مخطط).</li>
+                <li>👩‍💼 <strong>اجتماعي:</strong> توظيف بارستا محليين بأجور عادلة، ورش عمل مجانية للطلاب حول القهوة المختصة والإنتاجية.</li>
+                <li>📊 <strong>حوكمة:</strong> تقارير مالية شهرية للمستثمرين، أنظمة رقمية لمنع الهدر والسرقة.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔄 خطة البجعة السوداء</h2>
+            <ul>
+                <li><strong>انهيار الليرة التركية:</strong> تحويل التسعير إلى الدولار، قبول العملات المستقرة، استهداف العملاء الدوليين.</li>
+                <li><strong>إغلاق بسبب جائحة:</strong> التحول إلى “مطبخ مظلم” + توصيل حبوب القهوة المختصة + جلسات إنتاجية عبر الإنترنت.</li>
+                <li><strong>تقليد التصميم:</strong> تسجيل نموذج المنفعة للطاولة في تركيا، والتركيز على الاشتراكات التقنية للشركات كحاجز للخروج.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚪 خطة الخروج</h2>
+            <ul>
+                <li><strong>3-5 سنوات:</strong> بيع حقوق الامتياز لمناطق إسطنبول الإبداعية الأخرى (كاديكوي، بشيكطاش، كاراكوي).</li>
+                <li><strong>5-7 سنوات:</strong> استحواذ من سلسلة قهوة محلية (Kronotrop, Petra) أو مشغل مساحات عمل مشتركة – مضاعف 3-5x EBITDA (هدف).</li>
+                <li><strong>7 سنوات:</strong> بيع كامل العلامة التجارية والمنظومة التقنية لمجموعة دولية.</li>
+            </ul>
+        </div>
+
+        <div class="verification-small">⚠️ هذه النشرة تقديرية لغرض جذب الاستثمار. جميع الأرقام قابلة للتعديل بعد الدراسة المعمقة.</div>
+        <div class="footer-note">BİŞİŞ Prospectus – NEURA Coffee Lab | Pre‑Seed | نسخة للمناقشة</div>
+    </div>
+
+    <!-- ENGLISH VERSION (identical data) -->
+    <div id="content-en" class="content-pane" dir="ltr" aria-hidden="true">
+        <div class="section">
+            <h2>🔮 EXECUTIVE SUMMARY – PRODUCTIVITY REVOLUTION IN BOMONTI</h2>
+            <p><strong>NEURA Coffee Lab</strong> is a proposed first-of-its-kind productivity lab in Istanbul, merging specialty coffee (85+ SCA) with smart infrastructure for remote professionals. Target location: Bomonti – “Brooklyn of Istanbul” – where entrepreneurs, students, and freelancers lack quiet, tech-enabled workspaces.</p>
+            <div class="grid-2">
+                <div><span class="stat-number">$55k</span><br>Target CapEx (estimate)</div>
+                <div><span class="stat-number">33%</span><br>Target net margin</div>
+                <div><span class="stat-number">7-9</span><br>Target payback (months)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧠 PROPOSED COMPETITIVE ADVANTAGES</h2>
+            <ul>
+                <li>⚡ Productivity infrastructure: custom benches with Type-C/wireless charging, ultra-fast dual-source internet (fiber+5G), ergonomic solo seats.</li>
+                <li>🤖 Smart tech stack: gram-level inventory tracking (planned), B2B digital subscriptions, stablecoin payments to hedge TRY volatility.</li>
+                <li>🎨 Cyber‑minimalist design: Instagrammable lab aesthetic that traditional chains cannot replicate.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>💰 CAPITAL STRUCTURE – PRE‑SEED</h2>
+            <table id="funding-en">
+                <thead><tr><th>Source</th><th>Amount (USD)</th><th>Terms</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Equity (Visionary Angel)</th><td>$40k – $55k</th><td>30%-40% equity (negotiable)</th></tr>
+                    <tr><td class="gold">Microfinance / Debt</th><td>$10k – $15k</th><td>Local bank (if needed)</th></tr>
+                    <tr><td class="gold">Grants (KOSGEB)</th><td>$0 – $5k</th><td>Turkish small business tech grant (exploratory)</th></tr>
+                    <td><td class="gold"><strong>Total Target</strong></th><td class="gold"><strong>$55k – $65k</strong></th><td>Fit‑out, licenses, working capital</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="funding-en">📋 Copy table</button>
+        </div>
+
+        <div class="section">
+            <h2>📊 FINANCIAL PROJECTIONS (FIRST 12 MONTHS) – ESTIMATES</h2>
+            <table id="projections-en">
+                <thead><tr><th>Metric</th><th>Months 1-3</th><th>Months 4-6</th><th>Months 7-12</th><th>Annual Avg</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Monthly Revenue</th><td>$6k</th><td>$12k</th><td>$18k</th><td>$14.4k</th></tr>
+                    <tr><td class="gold">Monthly OpEx</th><td>$9k</th><td>$11k</th><td>$12k</th><td>$11k</th></tr>
+                    <tr><td class="gold">Net Monthly Profit</th><td>($3k)</th><td>$1k</th><td>$6k</th><td>$3.4k</th></tr>
+                    <tr><td class="gold">Break‑even Point</th><td colspan="4">Month 7 (cumulative cash flow positive – estimate)</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="projections-en">📋 Copy table</button>
+        </div>
+
+        <div class="section">
+            <h2>🌱 ESG & GOVERNANCE</h2>
+            <ul><li>♻️ Environmental: compostable cups, zero plastic waste, energy‑efficient equipment (planned).</li><li>👩‍💼 Social: fair wages for local baristas, free coffee workshops for students, inclusive workspace.</li><li>📊 Governance: monthly financial reports to investors, digital systems to prevent waste/theft.</li></ul>
+        </div>
+
+        <div class="section">
+            <h2>🔄 BLACK SWAN PIVOT</h2>
+            <ul><li>Turkish Lira collapse: switch pricing to USD, accept stablecoins, target international remote workers.</li><li>Pandemic lockdown: convert to dark kitchen + premium coffee bean e‑commerce + virtual productivity coaching.</li><li>Design copied: utility model patent for table in Turkey, double down on B2B tech subscriptions.</li></ul>
+        </div>
+
+        <div class="section">
+            <h2>🚪 EXIT STRATEGY</h2>
+            <ul><li>3-5 years: sell franchise rights for other Istanbul creative hubs (Kadıköy, Beşiktaş, Karaköy).</li><li>5-7 years: acquisition by local coffee chain (Kronotrop, Petra) or co‑working operator – 3-5x EBITDA multiple (target).</li><li>7 years: full IP & brand sale to international group.</li></ul>
+        </div>
+
+        <div class="verification-small">⚠️ This prospectus is a preliminary discussion document. All figures are estimates subject to due diligence.</div>
+        <div class="footer-note">BİŞİŞ Prospectus – NEURA Coffee Lab | Pre‑Seed | Discussion draft</div>
+    </div>
+</div>
+
+<script>
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const arPane = document.getElementById('content-ar');
+    const enPane = document.getElementById('content-en');
+
+    function setLanguage(lang) {
+        if (lang === 'ar') {
+            arPane.classList.add('active');
+            enPane.classList.remove('active');
+            arPane.setAttribute('aria-hidden', 'false');
+            enPane.setAttribute('aria-hidden', 'true');
+        } else {
+            enPane.classList.add('active');
+            arPane.classList.remove('active');
+            enPane.setAttribute('aria-hidden', 'false');
+            arPane.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            setLanguage(lang);
+        });
+    });
+
+    async function copyElementContent(element) {
+        if (element.tagName === 'TABLE') {
+            let text = '';
+            const rows = element.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const line = Array.from(cells).map(cell => cell.innerText.trim()).join('\t');
+                text += line + '\n';
+            });
+            return text;
+        }
+        return element.innerText.trim();
+    }
+
+    document.querySelectorAll('.clipboard').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const tableId = btn.getAttribute('data-table-id');
+            if (!tableId) return;
+            const table = document.getElementById(tableId);
+            if (!table) return;
+            const text = await copyElementContent(table);
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => btn.innerText = orig, 1500);
+            }).catch(() => alert('Manual copy required'));
+        });
+    });
+
+    setLanguage('ar');
+</script>
+</body>
+</html>

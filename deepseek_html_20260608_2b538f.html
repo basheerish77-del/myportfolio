@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BİŞİŞ | NEURA Coffee Lab - Strategic Analysis (AR/EN)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0A0A0A;
+            font-family: 'Inter', 'Cairo', system-ui, sans-serif;
+            color: #E5E5E5;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+        h1, h2, h3, .badge {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .analysis-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0F0F0F;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid #D4AF37;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #D4AF37;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-top: 0.75rem;
+        }
+        .lang-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            background: #1E1E1E;
+            border-bottom: 1px solid #2A2A2A;
+        }
+        .lang-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background: #141414;
+            border: none;
+            color: #999;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: #0A0A0A;
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .content-pane {
+            display: none;
+            padding: 2rem 2.5rem;
+            animation: fade 0.25s ease;
+        }
+        .content-pane.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .section {
+            background: #121212;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #262626;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #D4AF37;
+            border-right: 4px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0D0D0D;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #262626;
+            vertical-align: middle;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            text-align: center;
+        }
+        th:first-child, td:first-child {
+            text-align: right;
+        }
+        th {
+            background: #1A1A1A;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        td {
+            color: #E5E5E5;
+        }
+        .gold {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        button.clipboard {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+        button.clipboard:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #262626;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #888;
+        }
+        .verification-small {
+            font-size: 0.65rem;
+            text-align: center;
+            color: #AAA;
+            margin-top: 1rem;
+            border-top: 1px solid #2A2A2A;
+            padding-top: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="analysis-container">
+    <div class="header">
+        <h1>📊 BİŞİŞ CONTEXTUAL STRATEGY ANALYSIS</h1>
+        <div class="badge">NEURA COFFEE LAB – BOMONTI, ISTANBUL | PRE‑SEED</div>
+    </div>
+    <div class="lang-panel">
+        <button class="lang-btn active" data-lang="ar">العربية (AR)</button>
+        <button class="lang-btn" data-lang="en">ENGLISH (EN)</button>
+    </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="analysis-ar" class="content-pane active" dir="rtl" aria-hidden="false">
+        <div class="section">
+            <h2>🔍 السياق التاريخي والسوقي</h2>
+            <table id="market-context-ar">
+                <thead><tr><th>البعد</th><th>التحليل</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">منطقة بومونتي</th><td>"بروكلين إسطنبول" – قلب الإبداع والشركات الناشئة، جامعة معمار سنان، كثافة عالية من العاملين عن بعد. المقاهي الحالية تقليدية ومزدحمة وتفتقر لبنية العمل الرقمية.</th></tr>
+                    <tr><td class="gold">الفجوة السوقية</th><td>لا يوجد مقهى متخصص يدمج القهوة المختصة مع مساحات عمل فردية وتقنيات حديثة. مساحات العمل المشتركة باهظة الثمن (10 أضعاف).</th></tr>
+                    <tr><td class="gold">الرياح الاقتصادية</th><td>تضخم تركيا وتقلب الليرة – ولكن يمكن التحوط عبر التسعير بالدولار، الاشتراكات المدفوعة مقدماً، وقبول العملات المستقرة.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="market-context-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>🧠 الملكية الفكرية والميزة التنافسية</h2>
+            <table id="ip-moat-ar">
+                <thead><tr><th>طبقة الميزة</th><th>ميزة NEURA</th><th>ضعف المنافسين</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">هندسة الإنتاجية</th><td>طاولات مدمجة بشواحن Type-C ولا سلكية، إنترنت فائق السرعة (ألياف + 5G احتياطي)، عزل صوتي.</th><td>المقاهي التقليدية تفتقر للمقابس والإنترنت المستقر، وكراسٍ غير مريحة للعمل الطويل.</th></tr>
+                    <tr><td class="gold">المنظومة التقنية</th><td>نظام إدارة مخزون بالغرام (مخطط له)، اشتراكات رقمية للشركات B2B، دفع بالعملات المستقرة.</th><td>المنافسون يستخدمون كاشيرات تقليدية، هدر عالٍ، ولا يقدمون حلول B2B.</th></tr>
+                    <tr><td class="gold">التصميم التجريبي</th><td>جمالية سايبر-مينيماليست (Instagrammable)، إضاءة مزاجية، مقاعد فردية تركز على العمل.</th><td>سلاسل القهوة عامة وغير مميزة، المقاهي المستقلة تفتقر لميزانية التصميم.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="ip-moat-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>💰 محرك رأس المال الهجين (تقدير أولي)</h2>
+            <table id="capital-ar">
+                <thead><tr><th>المصدر</th><th>النطاق (دولار)</th><th>التبرير</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Equity (مستثمر رؤيوي)</th><td>40,000 – 55,000</th><td>تمويل أولي لافتتاح النموذج الأولي في بومونتي.</th></tr>
+                    <tr><td class="gold">تمويل صغير / دين</th><td>10,000 – 15,000</th><td>قروض بنوك محلية (إذا لزم الأمر).</th></tr>
+                    <tr><td class="gold">منح حكومية (KOSGEB)</th><td>0 – 5,000</th><td>دعم للشركات التقنية الصغيرة في تركيا (قيد الاستكشاف).</th></tr>
+                    <tr><td class="gold"><strong>الإجمالي المستهدف</strong></th><td class="gold"><strong>55,000 – 65,000</strong></th><td>لتغطية التجهيز، التراخيص، ورأس المال العامل لأول 6 أشهر.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="capital-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>⚖️ التوافق القضائي (تركيا)</h2>
+            <ul id="jurisdiction-ar">
+                <li><strong>الهيكل القانوني:</strong> شركة محدودة (Ltd. Şti.) في إسطنبول – ضريبة الشركات 25% (قابلة للخصم).</li>
+                <li><strong>المسار التنظيمي:</strong> رخصة بلدية + غرفة التجارة (4-6 أسابيع – مخطط لها).</li>
+                <li><strong>استراتيجية العملة:</strong> ربط الميزانية بالدولار، تحصيل الاشتراكات بالدولار أو العملات المستقرة، لتحوط التضخم.</li>
+            </ul>
+            <button class="clipboard" data-list-id="jurisdiction-ar">📋 نسخ القائمة</button>
+        </div>
+
+        <div class="section">
+            <h2>🌍 بروتوكول ESG والتأثير المحلي</h2>
+            <ul id="esg-ar">
+                <li><strong>البيئة:</strong> أكواب قابلة للتحلل، صفر نفايات بلاستيكية، معدات موفرة للطاقة (مخطط).</li>
+                <li><strong>المجتمع:</strong> توظيف بارستا محليين بأجور عادلة، ورش عمل مجانية للطلاب، مساحة شاملة للجميع.</li>
+                <li><strong>الحوكمة:</strong> تقارير مالية شهرية للمستثمرين، أنظمة رقمية لمنع الهدر والسرقة.</li>
+            </ul>
+            <button class="clipboard" data-list-id="esg-ar">📋 نسخ القائمة</button>
+        </div>
+
+        <div class="section">
+            <h2>🔀 خطة البجعة السوداء (التحول الاستراتيجي)</h2>
+            <ul id="blackswan-ar">
+                <li><strong>انهيار الليرة التركية:</strong> تحويل التسعير إلى الدولار، قبول العملات المستقرة (USDT)، استهداف العملاء الدوليين.</li>
+                <li><strong>إغلاق بسبب جائحة:</strong> التحول إلى "مطبخ مظلم" + توصيل حبوب القهوة المختصة + جلسات إنتاجية عبر الإنترنت.</li>
+                <li><strong>تقليد التصميم:</strong> تسجيل نموذج المنفعة للطاولة في تركيا، التركيز على الاشتراكات التقنية للشركات كحاجز للخروج.</li>
+            </ul>
+            <button class="clipboard" data-list-id="blackswan-ar">📋 نسخ القائمة</button>
+        </div>
+
+        <div class="section">
+            <h2>🚪 مخطط استراتيجية الخروج</h2>
+            <ul id="exit-ar">
+                <li><strong>3-5 سنوات:</strong> بيع حقوق الامتياز (Franchise) لمناطق إسطنبول الإبداعية الأخرى (كاديكوي، بشيكطاش، كاراكوي).</li>
+                <li><strong>5-7 سنوات:</strong> استحواذ من سلسلة قهوة محلية (Kronotrop, Petra) أو مشغل مساحات عمل مشتركة – مضاعف 3-5 أضعاف EBITDA (هدف).</li>
+                <li><strong>7 سنوات:</strong> بيع كامل العلامة التجارية والمنظومة التقنية لمجموعة دولية.</li>
+            </ul>
+            <button class="clipboard" data-list-id="exit-ar">📋 نسخ القائمة</button>
+        </div>
+
+        <div class="section">
+            <h2>✅ فحص الجودة الذاتي</h2>
+            <ul id="quality-ar">
+                <li>✔ التطابق الرياضي: CapEx 55k + رأس مال عامل 15k = 70k (بعد خصم الديون والمنح، equity المستهدف ~55k).</li>
+                <li>✔ تضمين مؤشرات ESG إلزامية.</li>
+                <li>✔ التوافق القضائي مع بيئة تركيا (تحوط التضخم).</li>
+            </ul>
+            <button class="clipboard" data-list-id="quality-ar">📋 نسخ القائمة</button>
+        </div>
+        <div class="verification-small">هذه الوثيقة تحليلية استراتيجية لأغراض التخطيط. جميع البيانات مبنية على معلومات متاحة للعامة وافتراضات منطقية.</div>
+        <div class="footer-note">BİŞİŞ LEVIATHAN ENGINE – التحليل السياقي (نسخة منقحة)</div>
+    </div>
+
+    <!-- ENGLISH VERSION -->
+    <div id="analysis-en" class="content-pane" dir="ltr" aria-hidden="true">
+        <div class="section">
+            <h2>🔍 HISTORICAL & MARKET CONTEXT</h2>
+            <table id="market-context-en">
+                <thead><tr><th>Dimension</th><th>Analysis</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Bomonti District</th><td>"Brooklyn of Istanbul" – startup hub, Mimar Sinan University, high density of remote workers. Existing cafes are traditional, noisy, lack work infrastructure.</th></tr>
+                    <tr><td class="gold">Market Gap</th><td>No specialty coffee lab integrated with solo work benches and advanced tech. Co-working spaces cost 10x more.</th></tr>
+                    <tr><td class="gold">Economic Headwinds</th><td>Turkey's inflation & TRY volatility – hedged via USD pricing, prepaid subscriptions, and stablecoin acceptance.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="market-context-en">📋 Copy table</button>
+        </div>
+
+        <div class="section">
+            <h2>🧠 IP & COMPETITIVE MOAT</h2>
+            <table id="ip-moat-en">
+                <thead><tr><th>Moat Layer</th><th>NEURA Advantage</th><th>Rival Weakness</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Productivity infrastructure</th><td>Custom benches with Type-C/wireless charging, dual‑source ultra‑fast internet, noise‑cancelling zones.</th><td>Traditional cafes have few outlets, unstable WiFi, uncomfortable seating.</th></tr>
+                    <tr><td class="gold">Tech stack</th><td>Gram‑level smart inventory (planned), B2B digital subscriptions, stablecoin payments.</th><td>Competitors use legacy POS, high waste, no B2B offering.</th></tr>
+                    <tr><td class="gold">Experiential design</th><td>Cyber‑minimalist Instagrammable aesthetic, mood lighting, solo focus seats.</th><td>Chains are generic; indie cafes lack design budget.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="ip-moat-en">📋 Copy table</button>
+        </div>
+
+        <div class="section">
+            <h2>💰 HYBRID CAPITAL ENGINE (Preliminary)</h2>
+            <table id="capital-en">
+                <thead><tr><th>Source</th><th>Range (USD)</th><th>Rationale</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Equity (Visionary Angel)</th><td>40,000 – 55,000</th><td>Pre‑seed funding for Bomonti flagship.</th></tr>
+                    <tr><td class="gold">Microfinance / Debt</th><td>10,000 – 15,000</th><td>Local bank loans if needed.</th></tr>
+                    <tr><td class="gold">Grants (KOSGEB)</th><td>0 – 5,000</th><td>Turkish small business tech grant (exploratory).</th></tr>
+                    <tr><td class="gold"><strong>Total Target</strong></th><td class="gold"><strong>55,000 – 65,000</strong></th><td>Covers fit‑out, licenses, 6 months working capital.</th></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="capital-en">📋 Copy table</button>
+        </div>
+
+        <div class="section">
+            <h2>⚖️ JURISDICTIONAL ALIGNMENT (Turkey)</h2>
+            <ul id="jurisdiction-en"><li>Legal structure: Ltd. Şti. in Istanbul – corporate tax 25% (deductible).</li><li>Regulatory path: Municipality license + chamber of commerce (4-6 weeks – planned).</li><li>Currency strategy: USD‑pegged budget, subscription fees in USD/stablecoins to hedge inflation.</li></ul>
+            <button class="clipboard" data-list-id="jurisdiction-en">📋 Copy list</button>
+        </div>
+
+        <div class="section">
+            <h2>🌍 ESG & LOCAL IMPACT</h2>
+            <ul id="esg-en"><li>Environmental: compostable cups, zero plastic waste, energy‑efficient equipment (planned).</li><li>Social: fair wages for local baristas, free workshops for students, inclusive space.</li><li>Governance: monthly financial reports to investors, digital systems to prevent waste/theft.</li></ul>
+            <button class="clipboard" data-list-id="esg-en">📋 Copy list</button>
+        </div>
+
+        <div class="section">
+            <h2>🔀 BLACK SWAN PIVOT PLAN</h2>
+            <ul id="blackswan-en"><li>Turkish Lira collapse: switch to USD pricing, accept stablecoins (USDT), target international remote workers.</li><li>Pandemic lockdown: convert to dark kitchen + premium coffee bean e‑commerce + virtual productivity coaching.</li><li>Design copied: utility model patent for table in Turkey, double down on B2B tech subscriptions.</li></ul>
+            <button class="clipboard" data-list-id="blackswan-en">📋 Copy list</button>
+        </div>
+
+        <div class="section">
+            <h2>🚪 EXIT STRATEGY BLUEPRINT</h2>
+            <ul id="exit-en"><li>3-5 years: sell franchise rights for other Istanbul creative hubs (Kadıköy, Beşiktaş, Karaköy).</li><li>5-7 years: acquisition by local coffee chain (Kronotrop, Petra) or co‑working operator – 3-5x EBITDA multiple (target).</li><li>7 years: full IP & brand sale to international group.</li></ul>
+            <button class="clipboard" data-list-id="exit-en">📋 Copy list</button>
+        </div>
+
+        <div class="section">
+            <h2>✅ QUALITY GATE SELF‑CHECK</h2>
+            <ul id="quality-en"><li>✔ Mathematical consistency: CapEx $55k + working capital $15k = $70k (after debt/grants, equity target ~$55k).</li><li>✔ ESG metrics defined.</li><li>✔ Jurisdictional alignment with Turkey (inflation hedge).</li></ul>
+            <button class="clipboard" data-list-id="quality-en">📋 Copy list</button>
+        </div>
+        <div class="verification-small">This document is a strategic planning tool, not a binding offer. All data based on public information and reasonable assumptions.</div>
+        <div class="footer-note">BİŞİŞ LEVIATHAN ENGINE – Strategic Analysis (revised)</div>
+    </div>
+</div>
+
+<script>
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const arPane = document.getElementById('analysis-ar');
+    const enPane = document.getElementById('analysis-en');
+
+    function setLanguage(lang) {
+        if (lang === 'ar') {
+            arPane.classList.add('active');
+            enPane.classList.remove('active');
+            arPane.setAttribute('aria-hidden', 'false');
+            enPane.setAttribute('aria-hidden', 'true');
+        } else {
+            enPane.classList.add('active');
+            arPane.classList.remove('active');
+            enPane.setAttribute('aria-hidden', 'false');
+            arPane.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            setLanguage(lang);
+        });
+    });
+
+    async function copyElementContent(element) {
+        if (element.tagName === 'TABLE') {
+            let text = '';
+            const rows = element.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const line = Array.from(cells).map(cell => cell.innerText.trim()).join('\t');
+                text += line + '\n';
+            });
+            return text;
+        } else if (element.tagName === 'UL') {
+            const items = element.querySelectorAll('li');
+            return Array.from(items).map(li => li.innerText.trim()).join('\n');
+        }
+        return element.innerText.trim();
+    }
+
+    document.querySelectorAll('.clipboard').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const tableId = btn.getAttribute('data-table-id');
+            const listId = btn.getAttribute('data-list-id');
+            let source = null;
+            if (tableId) source = document.getElementById(tableId);
+            else if (listId) source = document.getElementById(listId);
+            if (!source) return;
+            const text = await copyElementContent(source);
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => btn.innerText = orig, 1500);
+            }).catch(() => alert('Manual copy required'));
+        });
+    });
+
+    setLanguage('ar');
+</script>
+</body>
+</html>

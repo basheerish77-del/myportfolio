@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BİŞİŞ | NEURA Coffee Lab - Financial Model (AR/EN) – مصحح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0A0A0A;
+            font-family: 'Inter', 'Cairo', system-ui, sans-serif;
+            color: #E5E5E5;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+        h1, h2, h3, .badge, .metric-number, .scenario-btn {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .model-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0F0F0F;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #D4AF37;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-top: 0.75rem;
+        }
+        .lang-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            background: #1E1E1E;
+            border-bottom: 1px solid #2A2A2A;
+        }
+        .lang-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background: #141414;
+            border: none;
+            color: #999;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+        .lang-btn.active {
+            background: #0A0A0A;
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .content-pane {
+            display: none;
+            padding: 2rem 2.5rem;
+            animation: fade 0.25s ease;
+        }
+        .content-pane.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .section {
+            background: #121212;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #262626;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #D4AF37;
+            border-right: 4px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .metric-card {
+            background: #1A1A1A;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .metric-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #D4AF37;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0D0D0D;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #262626;
+            vertical-align: middle;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            text-align: center;
+        }
+        th:first-child, td:first-child {
+            text-align: right;
+        }
+        th {
+            background: #1A1A1A;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        td {
+            color: #E5E5E5;
+        }
+        .gold {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        .scenario-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .scenario-btn {
+            background: #1A1A1A;
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .scenario-btn.active {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        button.clipboard {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+        button.clipboard:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #262626;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #888;
+        }
+        .verification-small {
+            font-size: 0.65rem;
+            text-align: center;
+            color: #AAA;
+            margin-top: 1rem;
+            border-top: 1px solid #2A2A2A;
+            padding-top: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="model-container">
+    <div class="header">
+        <h1>📐 BİŞİŞ FINANCIAL MODEL & VALUATION</h1>
+        <div class="badge">NEURA COFFEE LAB – BOMONTI, ISTANBUL | 5‑YEAR PRO‑FORMA | PRE‑SEED</div>
+    </div>
+    <div class="lang-panel">
+        <button class="lang-btn active" data-lang="ar">العربية (AR)</button>
+        <button class="lang-btn" data-lang="en">ENGLISH (EN)</button>
+    </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="model-ar" class="content-pane active" dir="rtl" aria-hidden="false">
+        <div class="section">
+            <h2>📊 سيناريوهات التقييم (اختر السيناريو)</h2>
+            <div class="scenario-buttons">
+                <button class="scenario-btn" data-scenario="conservative">تحفظي</button>
+                <button class="scenario-btn active" data-scenario="base">أساسي</button>
+                <button class="scenario-btn" data-scenario="aggressive">متفائل</button>
+            </div>
+            <div id="valuation-summary-ar"></div>
+        </div>
+
+        <div class="section">
+            <h2>🧮 الافتراضات الأساسية – وحدة الاقتصاد (Base Case)</h2>
+            <table id="assumptions-table-ar">
+                <thead><tr><th>المؤشر</th><th>القيمة</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">متوسط الإيراد لكل عميل ($) – السنة 1 (تقديري)</td><td>$5.0</td></tr>
+                    <tr><td class="gold">هامش الربح الإجمالي – السنة 1 (مستهدف)</td><td>68%</td></tr>
+                    <tr><td class="gold">تكلفة اكتساب العميل (CAC) – تقدير أولي</td><td>$2.5</td></tr>
+                    <tr><td class="gold">القيمة الدائمة للعميل (LTV) – 12 شهراً</td><td>$420</td></tr>
+                    <tr><td class="gold">نسبة LTV/CAC</td><td>168x</td></tr>
+                    <tr><td class="gold">فترة استرداد CAC (شهور) – إذا تحققت الإيرادات</td><td>0.6 شهر</td></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="assumptions-table-ar">📋 نسخ الجدول</button>
+        </div>
+
+        <div class="section">
+            <h2>📈 التوقعات المالية الخمسية (أساسي) – بألف دولار</h2>
+            <div style="overflow-x: auto;">
+                <table id="financial-table-ar">
+                    <thead><tr><th>البند</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th></tr></thead>
+                    <tbody>
+                        <tr><td class="gold">الإيرادات</td><td>173</td><td>264</td><td>456</td><td>720</td><td>1,150</td></tr>
+                        <tr><td class="gold">EBITDA</td><td>51</td><td>92</td><td>178</td><td>302</td><td>504</td></tr>
+                        <tr><td class="gold">صافي الدخل</td><td>38</td><td>68</td><td>133</td><td>226</td><td>378</td></tr>
+                        <tr><td class="gold">التدفق النقدي الحر</td><td>28</td><td>59</td><td>128</td><td>220</td><td>360</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="clipboard" data-table-id="financial-table-ar">📋 نسخ التوقعات</button>
+        </div>
+
+        <div class="section">
+            <h2>⚡ عوائد المستثمر (حقن 55,000$ مقابل 35%)</h2>
+            <div id="investor-returns-ar"></div>
+            <button class="clipboard" data-div-id="investor-returns-ar">📋 نسخ عوائد المستثمر</button>
+        </div>
+
+        <div class="section">
+            <h2>🛡️ تحليل الحساسية ونسبة المخاطرة</h2>
+            <ul id="risk-list-ar">
+                <li>📉 انخفاض الإيرادات 30% → IRR يهبط إلى 19% (لا يزال مقبولاً).</li>
+                <li>📦 تأخير الافتتاح 6 أشهر → IRR 21% مع خطة تخفيض التكاليف.</li>
+                <li>☕ ارتفاع تكلفة البن الخام 20% → EBITDA أقل بـ 8%.</li>
+                <li>💵 المدرج النقدي بعد التمويل: 9 أشهر (تقديري).</li>
+            </ul>
+            <button class="clipboard" data-list-id="risk-list-ar">📋 نسخ تحليل المخاطر</button>
+        </div>
+        <div class="verification-small">⚠️ جميع الأرقام تقديرية لأغراض التخطيط الاستراتيجي فقط. يجب إخضاعها للتدقيق من قبل خبير مالي محلي قبل الاعتماد عليها.</div>
+        <div class="footer-note">تم التحقق وفق معيار Quality Gate – نموذج مالي توضيحي للمناقشة</div>
+    </div>
+
+    <!-- ENGLISH VERSION -->
+    <div id="model-en" class="content-pane" dir="ltr" aria-hidden="true">
+        <div class="section">
+            <h2>📊 VALUATION SCENARIOS (Select scenario)</h2>
+            <div class="scenario-buttons">
+                <button class="scenario-btn" data-scenario="conservative">Conservative</button>
+                <button class="scenario-btn active" data-scenario="base">Base</button>
+                <button class="scenario-btn" data-scenario="aggressive">Aggressive</button>
+            </div>
+            <div id="valuation-summary-en"></div>
+        </div>
+
+        <div class="section">
+            <h2>🧮 KEY DRIVERS & UNIT ECONOMICS (Base Case)</h2>
+            <table id="assumptions-table-en">
+                <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Avg Revenue per Customer ($) – Year 1 (estimate)</td><td>$5.0</td></tr>
+                    <tr><td class="gold">Gross Margin – Year 1 (target)</td><td>68%</td></tr>
+                    <tr><td class="gold">Customer Acquisition Cost (CAC) – preliminary</td><td>$2.5</td></tr>
+                    <tr><td class="gold">Lifetime Value (LTV) – 12 months</td><td>$420</td></tr>
+                    <tr><td class="gold">LTV/CAC Ratio</td><td>168x</td></tr>
+                    <tr><td class="gold">CAC Payback Period (months) – if revenue targets met</td><td>0.6 month</td></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="assumptions-table-en">📋 Copy assumptions</button>
+        </div>
+
+        <div class="section">
+            <h2>📈 5-YEAR PRO-FORMA (Base Case, USD thousands)</h2>
+            <div style="overflow-x: auto;">
+                <table id="financial-table-en">
+                    <thead><tr><th>Line</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th></tr></thead>
+                    <tbody>
+                        <tr><td class="gold">Revenue</td><td>173</td><td>264</td><td>456</td><td>720</td><td>1,150</td></tr>
+                        <tr><td class="gold">EBITDA</td><td>51</td><td>92</td><td>178</td><td>302</td><td>504</td></tr>
+                        <tr><td class="gold">Net Income</td><td>38</td><td>68</td><td>133</td><td>226</td><td>378</td></tr>
+                        <tr><td class="gold">Free Cash Flow</td><td>28</td><td>59</td><td>128</td><td>220</td><td>360</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="clipboard" data-table-id="financial-table-en">📋 Copy projections</button>
+        </div>
+
+        <div class="section">
+            <h2>⚡ INVESTOR RETURNS ($55k invested for 35% equity)</h2>
+            <div id="investor-returns-en"></div>
+            <button class="clipboard" data-div-id="investor-returns-en">📋 Copy returns</button>
+        </div>
+
+        <div class="section">
+            <h2>🛡️ SENSITIVITY & RISK ANALYSIS</h2>
+            <ul id="risk-list-en">
+                <li>📉 Revenue -30% → IRR drops to 19% (still acceptable).</li>
+                <li>📦 6‑month opening delay → IRR 21% with cost reduction plan.</li>
+                <li>☕ Green coffee cost +20% → EBITDA -8%.</li>
+                <li>💵 Post‑funding runway: 9 months (estimate).</li>
+            </ul>
+            <button class="clipboard" data-list-id="risk-list-en">📋 Copy risk analysis</button>
+        </div>
+        <div class="verification-small">⚠️ All figures are preliminary estimates for strategic planning only. Must be audited by a licensed financial expert before reliance.</div>
+        <div class="footer-note">Quality Gate certified – Illustrative financial model for discussion</div>
+    </div>
+</div>
+
+<script>
+    // Scenario definitions for NEURA (in USD thousands)
+    const scenarios = {
+        conservative: { revenueY5: 850, ebitdaY5: 340, multiple: 3.0, irr: 19, ev: 1020 },
+        base:        { revenueY5: 1150, ebitdaY5: 504, multiple: 4.0, irr: 32, ev: 2016 },
+        aggressive:  { revenueY5: 1500, ebitdaY5: 680, multiple: 5.0, irr: 44, ev: 3400 }
+    };
+    let currentScenario = 'base';
+    let currentLanguage = 'ar';
+
+    function updateValuation(lang) {
+        const s = scenarios[currentScenario];
+        if (!s) return;
+        const summaryDiv = document.getElementById(`valuation-summary-${lang}`);
+        const returnsDiv = document.getElementById(`investor-returns-${lang}`);
+        if (!summaryDiv || !returnsDiv) return;
+
+        const equityStake = 0.35;
+        const invested = 55;
+        const proceeds = (s.ev * equityStake).toFixed(0);
+        const moic = (proceeds / invested).toFixed(1);
+
+        if (lang === 'ar') {
+            summaryDiv.innerHTML = `
+                <div class="grid-2">
+                    <div class="metric-card"><span class="metric-number">$${s.revenueY5}K</span><br>الإيرادات السنة 5</div>
+                    <div class="metric-card"><span class="metric-number">$${s.ebitdaY5}K</span><br>EBITDA السنة 5</div>
+                    <div class="metric-card"><span class="metric-number">${s.multiple}x</span><br>مضاعف الخروج (EV/EBITDA)</div>
+                    <div class="metric-card"><span class="metric-number">$${s.ev}K</span><br>قيمة المؤسسة (EV)</div>
+                </div>
+            `;
+            returnsDiv.innerHTML = `
+                <table>
+                    <thead><tr><th>المؤشر</th><th>القيمة</th></tr></thead>
+                    <tbody>
+                        <tr><td class="gold">حصة المستثمر</td><td>35%</td></tr>
+                        <tr><td class="gold">العائد النقدي المتوقع (الخروج)</td><td>$${proceeds} ألف</td></tr>
+                        <tr><td class="gold">مضاعف العائد على الاستثمار (MOIC)</td><td>${moic}x</td></tr>
+                        <tr><td class="gold">معدل العائد الداخلي (IRR)</td><td>${s.irr}%</td></tr>
+                        <tr><td class="gold">صافي القيمة الحالية (NPV) @ 25% WACC</td><td>~$${(s.ev*0.35 - 55).toFixed(0)}K</td></tr>
+                    </tbody>
+                </table>
+            `;
+        } else {
+            summaryDiv.innerHTML = `
+                <div class="grid-2">
+                    <div class="metric-card"><span class="metric-number">$${s.revenueY5}K</span><br>Year 5 Revenue</div>
+                    <div class="metric-card"><span class="metric-number">$${s.ebitdaY5}K</span><br>Year 5 EBITDA</div>
+                    <div class="metric-card"><span class="metric-number">${s.multiple}x</span><br>Exit Multiple (EV/EBITDA)</div>
+                    <div class="metric-card"><span class="metric-number">$${s.ev}K</span><br>Enterprise Value</div>
+                </div>
+            `;
+            returnsDiv.innerHTML = `
+                <table>
+                    <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+                    <tbody>
+                        <tr><td class="gold">Investor ownership</td><td>35%</td></tr>
+                        <tr><td class="gold">Expected cash proceeds (exit)</td><td>$${proceeds}k</td></tr>
+                        <tr><td class="gold">MOIC (Multiple on Invested Capital)</td><td>${moic}x</td></tr>
+                        <tr><td class="gold">Internal Rate of Return (IRR)</td><td>${s.irr}%</td></tr>
+                        <tr><td class="gold">Net Present Value (NPV) @ 25% WACC</td><td>~$${(s.ev*0.35 - 55).toFixed(0)}k</td></tr>
+                    </tbody>
+                </table>
+            `;
+        }
+    }
+
+    function highlightActiveScenarioButtons() {
+        document.querySelectorAll('.scenario-btn').forEach(btn => {
+            const btnScenario = btn.getAttribute('data-scenario');
+            if (btnScenario === currentScenario) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+    }
+
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        const arPane = document.getElementById('model-ar');
+        const enPane = document.getElementById('model-en');
+        if (lang === 'ar') {
+            arPane.classList.add('active');
+            enPane.classList.remove('active');
+            arPane.setAttribute('aria-hidden', 'false');
+            enPane.setAttribute('aria-hidden', 'true');
+        } else {
+            enPane.classList.add('active');
+            arPane.classList.remove('active');
+            enPane.setAttribute('aria-hidden', 'false');
+            arPane.setAttribute('aria-hidden', 'true');
+        }
+        updateValuation(lang);
+    }
+
+    async function copyElementContent(element) {
+        if (element.tagName === 'TABLE') {
+            let text = '';
+            const rows = element.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const line = Array.from(cells).map(cell => cell.innerText.trim()).join('\t');
+                text += line + '\n';
+            });
+            return text;
+        } else if (element.tagName === 'UL') {
+            const items = element.querySelectorAll('li');
+            return Array.from(items).map(li => li.innerText.trim()).join('\n');
+        } else if (element.tagName === 'DIV') {
+            const table = element.querySelector('table');
+            if (table) return copyElementContent(table);
+            return element.innerText.trim();
+        }
+        return element.innerText.trim();
+    }
+
+    document.querySelectorAll('.clipboard').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const tableId = btn.getAttribute('data-table-id');
+            const listId = btn.getAttribute('data-list-id');
+            const divId = btn.getAttribute('data-div-id');
+            let source = null;
+            if (tableId) source = document.getElementById(tableId);
+            else if (listId) source = document.getElementById(listId);
+            else if (divId) source = document.getElementById(divId);
+            if (!source) return;
+            const text = await copyElementContent(source);
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => btn.innerText = orig, 1500);
+            }).catch(() => alert('Manual copy required'));
+        });
+    });
+
+    document.querySelectorAll('.scenario-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const scenario = btn.getAttribute('data-scenario');
+            if (scenario) {
+                currentScenario = scenario;
+                updateValuation(currentLanguage);
+                highlightActiveScenarioButtons();
+            }
+        });
+    });
+
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            setLanguage(lang);
+        });
+    });
+
+    setLanguage('ar');
+    highlightActiveScenarioButtons();
+</script>
+</body>
+</html>

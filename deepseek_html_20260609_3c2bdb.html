@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BİŞİŞ | NEURA Coffee Lab - Operational Control (AR/EN) – مصحح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0A0A0A;
+            font-family: 'Inter', 'Cairo', system-ui, sans-serif;
+            color: #E5E5E5;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+        h1, h2, h3, .badge {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .control-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0F0F0F;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #D4AF37;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-top: 0.75rem;
+        }
+        .lang-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            background: #1E1E1E;
+            border-bottom: 1px solid #2A2A2A;
+        }
+        .lang-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background: #141414;
+            border: none;
+            color: #999;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: #0A0A0A;
+            color: #D4AF37;
+            border-bottom: 2px solid #D4AF37;
+        }
+        .content-pane {
+            display: none;
+            padding: 2rem 2.5rem;
+            animation: fade 0.25s ease;
+        }
+        .content-pane.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .section {
+            background: #121212;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #262626;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #D4AF37;
+            border-right: 4px solid #D4AF37;
+            padding-right: 1rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0D0D0D;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #262626;
+            vertical-align: middle;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            text-align: center;
+        }
+        th:first-child, td:first-child {
+            text-align: right;
+        }
+        th {
+            background: #1A1A1A;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+        td {
+            color: #E5E5E5;
+        }
+        .gold {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        button.clipboard {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
+        button.clipboard:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+        .footer-note {
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #262626;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #888;
+        }
+        .verification-small {
+            font-size: 0.65rem;
+            text-align: center;
+            color: #AAA;
+            margin-top: 1rem;
+            border-top: 1px solid #2A2A2A;
+            padding-top: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="control-container">
+    <div class="header">
+        <h1>⚡ BİŞİŞ OPERATIONAL CONTROL</h1>
+        <div class="badge">NEURA COFFEE LAB – BOMONTI, ISTANBUL | PRE‑SEED EXECUTION ROADMAP</div>
+    </div>
+    <div class="lang-panel">
+        <button class="lang-btn active" data-lang="ar">العربية (AR)</button>
+        <button class="lang-btn" data-lang="en">ENGLISH (EN)</button>
+    </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="control-ar" class="content-pane active" dir="rtl" aria-hidden="false">
+        <div class="section">
+            <h2>📌 خطة التنفيذ – 12 شهراً (مستهدفة)</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>المرحلة 0 (الأشهر 1-2)</h3>
+                    <ul>
+                        <li>تأسيس الشركة (Ltd. Şti.) في إسطنبول.</li>
+                        <li>توقيع عقد إيجار موقع بومونتي (50م مربع – مستهدف).</li>
+                        <li>الحصول على التراخيص (بلدية، غرفة التجارة).</li>
+                        <li>طلب معدات القهوة والمقاعد المخصصة.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>المرحلة 1 (الأشهر 3-5)</h3>
+                    <ul>
+                        <li>التركيبات والديكور المستقلبي.</li>
+                        <li>تركيب شبكة الإنترنت فائقة السرعة.</li>
+                        <li>توظيف وتدريب 2 باريستا + مدير عمليات.</li>
+                        <li>الافتتاح التجريبي (100 عميل مدعو).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>المرحلة 2 (الأشهر 6-12)</h3>
+                    <ul>
+                        <li>الافتتاح الرسمي للجمهور.</li>
+                        <li>إطلاق نظام الاشتراكات للشركات المجاورة.</li>
+                        <li>بدء حملات التسويق الرقمي.</li>
+                        <li>تحقيق نقطة التعادل التشغيلي (الشهر السابع – مستهدف).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 مؤشرات الأداء التشغيلية المستهدفة (KPIs)</h2>
+            <table id="kpi-ar">
+                <thead>
+                    <tr><th>المؤشر</th><th>الربع 1</th><th>الربع 2</th><th>الربع 3</th><th>الربع 4</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="gold">متوسط عدد العملاء اليومي</td>
+                        <td>30</td><td>60</td><td>100</td><td>120</td>
+                    </tr>
+                    <tr><td class="gold">متوسط الإيراد لكل عميل ($)</td>
+                        <td>4.5</td><td>4.8</td><td>5.0</td><td>5.2</td>
+                    </tr>
+                    <tr><td class="gold">معدل دوران المقعد (مرات/يوم)</td>
+                        <td>2.1</td><td>2.5</td><td>3.0</td><td>3.4</td>
+                    </tr>
+                    <tr><td class="gold">نسبة العملاء الذين يستخدمون الاشتراك الشهري</td>
+                        <td>5%</td><td>10%</td><td>18%</td><td>25%</td>
+                    </tr>
+                    <tr><td class="gold">رضا العملاء (NPS)</td>
+                        <td>60</td><td>68</td><td>75</td><td>82</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="kpi-ar">📋 نسخ المؤشرات</button>
+        </div>
+
+        <div class="section">
+            <h2>💰 نموذج الصرف النقدي والسيولة – تقديرات</h2>
+            <ul id="cash-ar">
+                <li>🚀 إجمالي التمويل المطلوب: 55,000 دولار (Equity + دعم محتمل).</li>
+                <li>🔥 معدل الحرق الصافي المتوقع (المتوسط خلال الـ6 أشهر الأولى): 3,800 دولار/شهر.</li>
+                <li>🛡️ الاحتياطي النقدي الإلزامي: 3 أشهر من المصاريف التشغيلية (~30,000 دولار) – مشمول في رأس المال العامل.</li>
+                <li>⚡ خط ائتمان احتياطي: 10,000 دولار (تمويل صغير من بنك محلي) – غير مفعل إلا عند الحاجة.</li>
+            </ul>
+            <button class="clipboard" data-list-id="cash-ar">📋 نسخ بيانات السيولة</button>
+        </div>
+
+        <div class="section">
+            <h2>🧑‍🔬 الهيكل التنظيمي المخطط (السنة الأولى)</h2>
+            <table id="org-ar">
+                <thead>
+                    <tr><th>الدور</th><th>عدد الموظفين</th><th>الراتب الشهري (ليرة / دولار)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="gold">مدير العمليات (شريك/مؤسس)</td>
+                        <td>1</td><td>40,000₺ (~$1,200)</td>
+                    </tr>
+                    <tr><td class="gold">رئيس باريستا</td>
+                        <td>1</td><td>25,000₺ (~$750)</td>
+                    </tr>
+                    <tr><td class="gold">باريستا</td>
+                        <td>1-2</td><td>18,000₺ (~$540)</td>
+                    </tr>
+                    <tr><td class="gold">أخصائي تسويق رقمي (خارجي)</td>
+                        <td>0.5</td><td>10,000₺ (~$300)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>ملاحظة:</strong> 100% موظفين محليين من منطقة بومونتي، مع برامج تدريب.</p>
+            <button class="clipboard" data-table-id="org-ar">📋 نسخ الهيكل</button>
+        </div>
+
+        <div class="section">
+            <h2>🏭 سلسلة التوريد والشراكات المقترحة</h2>
+            <ul>
+                <li>☕ <strong>البن الأخضر:</strong> محادثات أولية مع محامص محلية (Kronotrop, Petra) لضمان جودة SCA 85+ وخصم 15% على الكميات (هدف).</li>
+                <li>🥛 <strong>الحليب والمواد:</strong> خطط لعقود أسبوعية مع موردي الألبان العضويين في إسطنبول.</li>
+                <li>🔌 <strong>التقنية:</strong> نظام نقاط البيع السحابي (iiko أو Sapaad) – قيد الدراسة.</li>
+                <li>📦 <strong>معدات القهوة:</strong> توريد من La Marzocco المحلي مع عقد صيانة لمدة سنتين (مخطط).</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>✅ الامتثال التنظيمي والجودة – الخطوات القادمة</h2>
+            <ul>
+                <li>📅 التراخيص البلدية: ستقدم بعد تأسيس الشركة (4-6 أسابيع).</li>
+                <li>🔒 الامتثال للضريبة: تسجيل ضريبة القيمة المضافة (KDV) بنسبة 10% على المشروبات الساخنة.</li>
+                <li>🧾 شهادة سلامة الغذاء: برنامج تدريبي لمدة يومين من وزارة الزراعة.</li>
+            </ul>
+        </div>
+        <div class="verification-small">⚠️ هذه الخطة تشغيلية تقديرية. الجداول الزمنية والأعداد قابلة للتعديل بعد التمويل ودراسة الجدوى.</div>
+        <div class="footer-note">BİŞİŞ Operational Control – NEURA Coffee Lab | خطة تنفيذية للمناقشة (مصححة)</div>
+    </div>
+
+    <!-- ENGLISH VERSION (same corrections) -->
+    <div id="control-en" class="content-pane" dir="ltr" aria-hidden="true">
+        <div class="section">
+            <h2>📌 12‑MONTH EXECUTION ROADMAP (Targets)</h2>
+            <div class="grid-2">
+                <div><h3>Phase 0 (Months 1-2)</h3><ul><li>Company registration in Istanbul.</li><li>Sign lease for Bomonti location (50sqm – target).</li><li>Obtain municipality & trade licenses.</li><li>Order coffee equipment + custom furniture.</li></ul></div>
+                <div><h3>Phase 1 (Months 3-5)</h3><ul><li>Cyber‑minimalist fit‑out.</li><li>Install high‑speed internet.</li><li>Hire and train 2 baristas + ops manager.</li><li>Soft launch (100 invited guests).</li></ul></div>
+                <div><h3>Phase 2 (Months 6-12)</h3><ul><li>Official public opening.</li><li>Launch B2B subscription system.</li><li>Start digital marketing.</li><li>Achieve break‑even (month 7 – target).</li></ul></div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>📊 TARGET OPERATIONAL KPIs</h2>
+            <table id="kpi-en">
+                <thead><tr><th>KPI</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Avg daily customers</td><td>30</td><td>60</td><td>100</td><td>120</td></tr>
+                    <tr><td class="gold">Avg revenue per customer ($)</td><td>4.5</td><td>4.8</td><td>5.0</td><td>5.2</td></tr>
+                    <tr><td class="gold">Seat turnover (per day)</td><td>2.1</td><td>2.5</td><td>3.0</td><td>3.4</td></tr>
+                    <tr><td class="gold">Monthly subscription adoption</td><td>5%</td><td>10%</td><td>18%</td><td>25%</td></tr>
+                    <tr><td class="gold">NPS score</td><td>60</td><td>68</td><td>75</td><td>82</td></tr>
+                </tbody>
+            </table>
+            <button class="clipboard" data-table-id="kpi-en">📋 Copy KPIs</button>
+        </div>
+        <div class="section">
+            <h2>💰 CASH BURN & LIQUIDITY – ESTIMATES</h2>
+            <ul id="cash-en"><li>🚀 Total funding required: $55,000 (equity + possible micro‑debt).</li><li>🔥 Average net burn rate (first 6 months): $3,800/month.</li><li>🛡️ Mandatory cash reserve: 3 months of OpEx (~$30k) – included in working capital.</li><li>⚡ Standby credit line: $10k (local bank microfinance) – activated only if needed.</li></ul>
+            <button class="clipboard" data-list-id="cash-en">📋 Copy liquidity data</button>
+        </div>
+        <div class="section">
+            <h2>🧑‍🔬 PLANNED TEAM STRUCTURE (YEAR 1)</h2>
+            <table id="org-en">
+                <thead><tr><th>Role</th><th>Headcount</th><th>Monthly Salary (TRY/USD)</th></tr></thead>
+                <tbody>
+                    <tr><td class="gold">Operations Manager (founder)</td><td>1</td><td>40,000₺ (~$1,200)</td></tr>
+                    <tr><td class="gold">Head Barista</td><td>1</td><td>25,000₺ (~$750)</td></tr>
+                    <tr><td class="gold">Barista</td><td>1-2</td><td>18,000₺ (~$540)</td></tr>
+                    <tr><td class="gold">Digital Marketing (external)</td><td>0.5</td><td>10,000₺ (~$300)</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Note:</strong> 100% local hiring from Bomonti area, with training programs.</p>
+            <button class="clipboard" data-table-id="org-en">📋 Copy structure</button>
+        </div>
+        <div class="section">
+            <h2>🏭 SUPPLY CHAIN & PROPOSED PARTNERSHIPS</h2>
+            <ul><li>☕ Green beans: preliminary talks with local roasters (Kronotrop, Petra) – target 15% volume discount.</li><li>🥛 Milk & supplies: plans for weekly contracts with Istanbul organic dairy farms.</li><li>🔌 Tech: cloud POS (iiko/Sapaad) – under evaluation.</li><li>📦 Equipment: La Marzocco local distributor with 2‑year maintenance plan (target).</li></ul>
+        </div>
+        <div class="section">
+            <h2>✅ REGULATORY & QUALITY – NEXT STEPS</h2>
+            <ul><li>📅 Municipality licenses: to be filed after company setup (4‑6 weeks).</li><li>🔒 VAT registration: 10% on hot beverages.</li><li>🧾 Food safety certificate: 2‑day training by Ministry of Agriculture.</li></ul>
+        </div>
+        <div class="verification-small">⚠️ This operational plan is illustrative. Timelines and numbers are subject to change after funding and feasibility study.</div>
+        <div class="footer-note">BİŞİŞ Operational Control – NEURA Coffee Lab | Discussion draft (corrected)</div>
+    </div>
+</div>
+
+<script>
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const arPane = document.getElementById('control-ar');
+    const enPane = document.getElementById('control-en');
+
+    function setLanguage(lang) {
+        if (lang === 'ar') {
+            arPane.classList.add('active');
+            enPane.classList.remove('active');
+            arPane.setAttribute('aria-hidden', 'false');
+            enPane.setAttribute('aria-hidden', 'true');
+        } else {
+            enPane.classList.add('active');
+            arPane.classList.remove('active');
+            enPane.setAttribute('aria-hidden', 'false');
+            arPane.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            setLanguage(lang);
+        });
+    });
+
+    async function copyElementContent(element) {
+        if (element.tagName === 'TABLE') {
+            let text = '';
+            const rows = element.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const line = Array.from(cells).map(cell => cell.innerText.trim()).join('\t');
+                text += line + '\n';
+            });
+            return text;
+        } else if (element.tagName === 'UL') {
+            const items = element.querySelectorAll('li');
+            return Array.from(items).map(li => li.innerText.trim()).join('\n');
+        }
+        return element.innerText.trim();
+    }
+
+    document.querySelectorAll('.clipboard').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const tableId = btn.getAttribute('data-table-id');
+            const listId = btn.getAttribute('data-list-id');
+            let source = null;
+            if (tableId) source = document.getElementById(tableId);
+            else if (listId) source = document.getElementById(listId);
+            if (!source) return;
+            const text = await copyElementContent(source);
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => btn.innerText = orig, 1500);
+            }).catch(() => alert('Manual copy required'));
+        });
+    });
+
+    setLanguage('ar');
+</script>
+</body>
+</html>
